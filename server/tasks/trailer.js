@@ -25,7 +25,6 @@ const { resolve } = require('path')
   })
 
   child.on('message', data => {
-
     console.log(data)
   })
 

@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const process = require('process')
 
 const url = 'https://movie.douban.com/explore#!type=movie&tag=%E7%83%AD%E9%97%A8&sort=rank&page_limit=20&page_start=0'
 
@@ -23,9 +24,9 @@ const sleep = time => new Promise(resolve => {
 
   await page.waitForSelector('.more')
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 3; i++) {
     await sleep(3000)
-    await page.click('.more')
+    await page.click('.list-wp .more')
   }
 
   const result = await page.evaluate(() => {
@@ -56,4 +57,7 @@ const sleep = time => new Promise(resolve => {
   browser.close()
 
   console.log(result)
+
+  process.send({result})
+  process.exit(0)
 })()
