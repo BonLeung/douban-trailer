@@ -9,6 +9,22 @@ exports.initSchemas = () => {
   glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require)
 }
 
+exports.initAdmin = async () => {
+  const User = mongoose.model('User')
+  let user = await User.findOne({
+    username: 'BonLeung'
+  })
+  if (!user) {
+    user = new User({
+      username: 'BonLeung',
+      email: '404151146@qq.com',
+      password: '123456'
+    })
+
+    await user.save()
+  }
+}
+
 exports.connect = () => {
   let maxConnectTimes = 0
   return new Promise((resolve, reject) => {
@@ -39,13 +55,6 @@ exports.connect = () => {
     })
 
     mongoose.connection.once('open', err => {
-      const Dog = mongoose.model('Dog', {name: String})
-      const doga = new Dog({name: '阿尔法'})
-
-      doga.save().then(() => {
-        console.log('wang')
-      })
-
       resolve()
       console.log('MongooDB connected successful')
     })

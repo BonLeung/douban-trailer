@@ -16,6 +16,9 @@ const sleep = time => new Promise(resolve => {
   })
 
   const page = await browser.newPage()
+
+  for (let i = 0; i < movies.length; i++)
+
   await page.goto(url, {
     waitUntil: 'networkidle2'
   })
@@ -55,8 +58,6 @@ const sleep = time => new Promise(resolve => {
   })
 
   browser.close()
-
-  console.log(result)
 
   process.send({result})
   process.exit(0)
