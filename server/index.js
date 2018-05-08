@@ -3,7 +3,20 @@ const views = require('koa-views')
 const mongoose = require('mongoose')
 const { resolve } = require('path')
 const { connect, initSchemas, initAdmin } = require('./database/init')
-const router = require('./routes')
+const R = require('ramda')
+const MIDDLEWARES = ['router']
+
+const useMiddlewares = (app) => {
+  R.map(
+    R.compose(
+      R.forEachObjIndexed(
+        initWith=> initWith(app)
+      ),
+      require,
+      name => resolve(__dirname, `./midddlewares/${name}`)
+    )
+  )(MIDDLEWARES)
+}
 
 ;(async () => {
   await connect()
@@ -12,6 +25,14 @@ const router = require('./routes')
 
   await initAdmin()
 
+  const app = new Koa()
+
+  await useMiddlewares(app)
+
+  app.listen(9000, () => {
+    console.log('app is running at localhost:9000')
+  })
+
   // require('./tasks/movie')
   // require('./tasks/api')
   // require('./tasks/trailer')
@@ -19,16 +40,6 @@ const router = require('./routes')
 
 })()
 
-const app = new Koa()
 
-app
-  .use(router.routes())
-  .use(router.allowedMethods())
 
-app.use(views(resolve(__dirname, './views'), {
-  extension: 'pug'
-}))
 
-app.listen(9000, () => {
-  console.log('app is running at localhost:9000')
-})
