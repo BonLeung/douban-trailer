@@ -4,16 +4,16 @@ const mongoose = require('mongoose')
 const { resolve } = require('path')
 const { connect, initSchemas, initAdmin } = require('./database/init')
 const R = require('ramda')
-const MIDDLEWARES = ['router']
+const MIDDLEWARES = ['router', 'parcel']
 
 const useMiddlewares = (app) => {
   R.map(
     R.compose(
       R.forEachObjIndexed(
-        initWith=> initWith(app)
+        initWith => initWith(app)
       ),
       require,
-      name => resolve(__dirname, `./midddlewares/${name}`)
+      name => resolve(__dirname, `./middlewares/${name}`)
     )
   )(MIDDLEWARES)
 }

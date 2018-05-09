@@ -2,7 +2,7 @@ const Router = require('koa-router')
 const router = new Router()
 const mongoose = require('mongoose')
 const { controller, get, post, put } = require('../lib/decorator')
-const { getAllMovies, getMovieDetail } = require('../service/movie')
+const { getAllMovies, getMovieDetail, getRelativeMovies } = require('../service/movie')
 
 @controller('/api/v0/movies')
 export class movieController {
