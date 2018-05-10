@@ -8,8 +8,8 @@ npm-debug.log
 .DS_Store
 
 # Build
-build
-dist
+build/
+dist/
 
 # database
-mongodb
+mongodb/*
