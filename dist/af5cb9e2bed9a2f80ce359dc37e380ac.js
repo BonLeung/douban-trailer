@@ -125,7 +125,7 @@ var Home = function (_Component) {
 }(_react.Component);
 
 exports.default = Home;
-},{"babel-runtime/core-js/object/get-prototype-of":225,"babel-runtime/helpers/classCallCheck":169,"babel-runtime/helpers/createClass":171,"babel-runtime/helpers/possibleConstructorReturn":170,"babel-runtime/helpers/inherits":168,"react":15}],1037:[function(require,module,exports) {
+},{"babel-runtime/core-js/object/get-prototype-of":225,"babel-runtime/helpers/classCallCheck":168,"babel-runtime/helpers/createClass":169,"babel-runtime/helpers/possibleConstructorReturn":170,"babel-runtime/helpers/inherits":171,"react":13}],1037:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -145,7 +145,7 @@ module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
-  var ws = new WebSocket('ws://' + hostname + ':' + '62691' + '/');
+  var ws = new WebSocket('ws://' + hostname + ':' + '49385' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
